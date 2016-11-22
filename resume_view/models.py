@@ -46,4 +46,3 @@ class Pics(models.Model):
     seq = models.IntegerField()
     image=models.FileField(upload_to=pic_directory_path)
     caption = models.CharField(max_length=50)
-

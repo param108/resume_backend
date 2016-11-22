@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div>
-<h2>Project Information<br><small>Enter the information regarding a project</small></h2>
+<h2>Project Information<br><small>The devils lie in the details</small></h2>
 <form action="/resume/project/{{idslash}}" method="POST">
 <table class="table table-striped">
 {{form.as_table}}
@@ -9,5 +9,12 @@
 <tr><td></td><td><input class="btn btn-primary" type="submit" value="{{btntext}}"/></td></tr>
 </table>
 </form>
+{% if idslash %}
+<h3>Pics</h3>
+<h3>Tech</h3>
+{% else %}
+<h3>Pics <small>You can add pictures after you save</small></h3>
+<h3>Tech <small>You can add Technology Tags after you save</small></h3>
+{% endif %}
 </div>
 {% endblock %}
