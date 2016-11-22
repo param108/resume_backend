@@ -16,8 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 import views
+from resume_backend import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
-    url(r'^update/', views.update_resume),
-    url(r'^view/', views.show_resume),
+    url(r'^project/(?P<pid>[0-9]+)/$', views.update_project),
+    url(r'^project/$', views.manage_project),
+    url(r'^view/$', views.show_resume),
     url(r'^data/(?P<year>[0-9]+)/$', views.data)
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

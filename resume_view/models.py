@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-
+import re
 from django.db import models
 
 # Create your models here.
@@ -11,7 +11,7 @@ class Project(models.Model):
     teamsize= models.IntegerField()
     company = models.CharField(max_length=50)
     desc = models.TextField()
-    pics = models.BooleanField(default=False)
+    pics_available = models.BooleanField(default=False)
 
 class Tech(models.Model):
     tech = models.CharField(max_length=20)
