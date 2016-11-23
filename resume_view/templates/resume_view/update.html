@@ -18,17 +18,17 @@
 </table>
 </form>
 {% if idslash %}
-<h3 class="add-pics-label">Pics</h3> <button class="btn btn-default add-pics-btn">Add Pic</button><br>
+<h3 class="add-pics-label">Pics</h3> <button onclick="add_pic_clicked();" class="btn btn-default add-pics-btn">Add Pic</button><br>
 <div class="add-pics-div">
-<table class="table table-striped">
+<table class="table table-striped add-pics-table">
 {% for pic in pics %}
 <tr><td>{{pic.caption}}</td><td><img class="pic-img" src="{{pic.url}}"></img></td><td><a class="btn btn-danger" href="/resume/project/pic/delete/{{pic.id}}/">Delete</a></td></tr>
 {% endfor %}
 </table>
 </div>
-<h3 class="add-tech-label">Tech</h3> <button class="btn btn-default add-tech-btn">Add Tech</button><br>
+<h3 class="add-tech-label">Tech</h3> <button onclick="add_tech_clicked();" class="btn btn-default add-tech-btn">Add Tech</button><br>
 <div class="add-tech-div">
-<table class="table table-striped">
+<table class="table table-striped add-tech-table">
 {% for te in tech %}
 <tr><td>{{te.tech}}</td><td><a class="btn btn-danger" href="/resume/project/pic/delete/{{te.id}}/">Delete</a></td></tr>
 {% endfor %}
