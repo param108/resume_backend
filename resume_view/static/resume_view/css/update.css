@@ -1,0 +1,21 @@
+.add-pics-label {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.add-pics-btn {
+  display: inline-block;
+  padding-left: 10px;
+  vertical-align: bottom;
+}
+
+.add-tech-label {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.add-tech-btn {
+  display: inline-block;
+  padding-left: 10px;
+  vertical-align: bottom;
+}

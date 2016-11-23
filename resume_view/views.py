@@ -21,10 +21,19 @@ def populate_default_form(proj):
 
 @never_cache
 def project_list(request):
-  projects = [(x,Pics.objects.filter(project=x.id),Tech.objects.filter(project=x.id)) for x in Project.objects.all().order_by("year")]
+  #projects = [(x,Pics.objects.filter(project=x.id),Tech.objects.filter(project=x.id)) for x in Project.objects.all().order_by("year")]
+  projects = Project.objects.all().order_by("year")
   return render(request,"resume_view/list.html",{'ps': projects})
 
-
+@never_cache
+def delete_project(request, pid):
+  try:
+    proj = Project.objects.get(pk=int(pid))
+  except:
+    return HttpResponseRedirect("/resume/project/list/")
+  proj.delete()
+  return HttpResponseRedirect("/resume/project/list/")
+  
 @never_cache
 def update_project(request, pid):
   try:
@@ -34,7 +43,11 @@ def update_project(request, pid):
 
   if request.method == 'GET':
     form = populate_default_form(proj)
+    pics = Pics.objects.filter(project=proj.id)
+    tech = Tech.objects.filter(project=proj.id)
     return render(request,"resume_view/update.html",{"form": form,
+                                                     "pics": pics,
+                                                     "tech": tech,
                                                      "idslash": "{0}/".format(pid),
                                                      "btntext": "Update"})
   elif request.method == 'POST':
@@ -43,6 +56,13 @@ def update_project(request, pid):
       proj = copy_project_details(form,proj)
       proj.save()
       return HttpResponseRedirect("/resume/project/{0}/".format(proj.id))
+    pics = Pics.objects.filter(project=proj.id)
+    tech = Tech.objects.filter(project=proj.id)
+    return render(request,"resume_view/update.html",{"form": form,
+                                                     "pics": pics,
+                                                     "tech": tech,
+                                                     "idslash": "{0}/".format(pid),
+                                                     "btntext": "Update"})
    
 def copy_project_details(form, proj):
   proj.year = form.cleaned_data['year']
@@ -58,6 +78,8 @@ def manage_project(request):
   if request.method == "GET":
     form = ProjectForm()
     return render(request,"resume_view/update.html",{"form": form,
+                                                     "pics": None,
+                                                     "tech": None,
                                                      "idslash": "",
                                                      "btntext": "Save"})
   # no fall through
@@ -69,6 +91,8 @@ def manage_project(request):
       return HttpResponseRedirect("/resume/project/{0}/".format(proj.id))
     else:
       return render(request,"resume_view/update.html",{"form": form,
+                                                     "pics": None,
+                                                     "tech": None,
                                                      "idslash": "",
                                                      "btntext": "Save"})
 

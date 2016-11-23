@@ -1,7 +1,15 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+{% block headext %}
+    <link rel="stylesheet" href="{% static "resume_view/css/update.css" %}"></script>
+    <script src="{% static "resume_view/js/update.js" %}"></script>
+{% endblock %}
+
 {% block content %}
 <div>
 <h2>Project Information<br><small>The devils lie in the details</small></h2>
+<a style="margin-left:10px;margin-bottom:10px;" class="btn btn-default" href="/resume/project/list/">Back To List</a>
+
 <form action="/resume/project/{{idslash}}" method="POST">
 <table class="table table-striped">
 {{form.as_table}}
@@ -10,8 +18,22 @@
 </table>
 </form>
 {% if idslash %}
-<h3>Pics</h3>
-<h3>Tech</h3>
+<h3 class="add-pics-label">Pics</h3> <button class="btn btn-default add-pics-btn">Add Pic</button><br>
+<div class="add-pics-div">
+<table class="table table-striped">
+{% for pic in pics %}
+<tr><td>{{pic.caption}}</td><td><img class="pic-img" src="{{pic.url}}"></img></td><td><a class="btn btn-danger" href="/resume/project/pic/delete/{{pic.id}}/">Delete</a></td></tr>
+{% endfor %}
+</table>
+</div>
+<h3 class="add-tech-label">Tech</h3> <button class="btn btn-default add-tech-btn">Add Tech</button><br>
+<div class="add-tech-div">
+<table class="table table-striped">
+{% for te in tech %}
+<tr><td>{{te.tech}}</td><td><a class="btn btn-danger" href="/resume/project/pic/delete/{{te.id}}/">Delete</a></td></tr>
+{% endfor %}
+</table>
+</div>
 {% else %}
 <h3>Pics <small>You can add pictures after you save</small></h3>
 <h3>Tech <small>You can add Technology Tags after you save</small></h3>

@@ -2,11 +2,12 @@
 {% block content %}
 <div>
 <h2>Project List<br><small>Chronological order</small></h2>
-<table class="table table-striped">
+<a style="margin-left:10px;" class="btn btn-default" href="/resume/project/">Add a project</a>
+<table style="margin-top:10px;" class="table table-striped">
 <tr>
 <th>Year</th><th>Title</th><th>Actions</th>
 </tr>
-{% for project,pics,tech in ps %}
+{% for project in ps %}
 <tr>
 <td>{{project.year}}</td><td>{{project.title}}</td><td><a href="/resume/project/{{project.id}}/" class="btn btn-success">Edit</a> <a href="/resume/project/delete/{{project.id}}/" class="btn btn-danger">Delete</a></td>
 </tr>

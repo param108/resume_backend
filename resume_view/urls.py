@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^project/(?P<pid>[0-9]+)/$', views.update_project),
     url(r'^project/$', views.manage_project),
     url(r'^project/list/$', views.project_list),
+    url(r'^project/delete/(?P<pid>[0-9]+)/$', views.delete_project),
     url(r'^view/$', views.show_resume),
     url(r'^data/(?P<year>[0-9]+)/$', views.data)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
